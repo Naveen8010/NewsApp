@@ -13,7 +13,7 @@ const Navbar=()=>  {
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">
         
-        <li className="nav-item"> <Link className="nav-link " aria-current="page" to="/General">General</Link></li>   
+        <li className="nav-item"><Link className="nav-link " aria-current="page" to="/General">General</Link></li>   
         <li className="nav-item "><Link className="nav-link" to="/Business">Business</Link></li>
         <li className="nav-item"><Link className="nav-link" to="/Sports">Sports</Link></li>
         <li className="nav-item"><Link className="nav-link" to="/Entertainment">Entertainment</Link></li>

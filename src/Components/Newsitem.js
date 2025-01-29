@@ -8,7 +8,7 @@ const Newsitem=(props)=> {
       <div className="my-3">
         <div   className="card" >
           <div style={{ display:'flex', justifyContent:'flex-end', position:'absolute', right:'0' }}>
-          <span class="  badge rounded-pill bg-danger">{source}</span>
+          <span className="  badge rounded-pill bg-danger">{source}</span>
         </div>
     <img src={!imageUrl?"https:a4.espncdn.com/combiner/i?img=%2Fi%2Fcricket%2Fcricinfo%2F1219926_1296x729.jpg":imageUrl} className="card-img-top" alt="..."/>
         <div   className="card-body">
