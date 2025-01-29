@@ -53,7 +53,11 @@ const News=(props)=> {
     // let url = `https://newsapi.org/v2/top-headlines?country=us&category=general&apiKey=b3547c91577343878a0ebb3a8f5ae40c&page=1&pageSize=6`;
     let url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=b3547c91577343878a0ebb3a8f5ae40c&page=${page+1}&pageSize=${props.pageSize}`;
     setPage(page + 1)
-    let data = await fetch(url);
+    let data = await fetch(url, {
+      headers:{
+        "Upgrade-Insecure-Request": "1"
+      }
+    });
     let parsedData = await data.json();
     console.log(parsedData)
     setArticles(articles.concat(parsedData.articles))
