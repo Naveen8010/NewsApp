@@ -20,20 +20,31 @@ const News=(props)=> {
     
   
   const updateNews = async()=>{
+    try{
     props.setProgress(0);
     //  const url= `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=b3547c91577343878a0ebb3a8f5ae40c&page=1&pageSize=6`;
     const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=b3547c91577343878a0ebb3a8f5ae40c&page=${page}&pageSize=${props.pageSize}`;
     setLoading(true)
     props.setProgress(50);
-    let data = await fetch(url);
-    let parsedData = await data.json();
-    console.log(parsedData)
-    props.setProgress(80);
-    setArticles(parsedData.articles )
-    setTotalResults(parsedData.totalResults)  
-    setLoading(false)
-    props.setProgress(100);
 
+    let data = await fetch(url);
+     if(!data.ok){
+      throw new Error(`HTTP Error! Status: ${data.status}`);
+     }
+    let parsedData = await data.json();
+    console.log(parsedData);
+
+    props.setProgress(80);
+    setArticles(parsedData.articles || []);
+    setTotalResults(parsedData.totalResults || 0);  
+    setLoading(false);
+    props.setProgress(100);
+    }
+    catch(error){
+      console.error("fetching news failed:", error);
+      setArticles([]);
+      setLoading(false);
+    }
   }
  
   
@@ -59,7 +70,7 @@ const News=(props)=> {
         {loading && <Buffer/>}
        
         <InfiniteScroll
-          dataLength={articles.length}
+          dataLength= {Array.isArray(articles) ? articles.length : 0}
           next={fetchMoreData}
           hasMore={articles.length !== totalResults}
           loader={<Buffer/>}
